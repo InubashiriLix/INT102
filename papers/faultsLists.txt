@@ -44,9 +44,9 @@ AND WHEN A BRANCH IS END, PLEASE GO BACKWARD AND FIND THE NODE WHERE HAVE NOT BE
 a b f g c d h e 
 
 14. Let G be a weighted connected graph 
-I.  If the edge weights are all different G must have exactly one MST  
-II. If the edge weights are not all different G must have more than one MST  
-III.If the edge weights are all same, every spanning tree of G is a MST  
+I.  If the edge weights are all different G must have exactly one MST         TRUE
+II. If the edge weights are not all different G must have more than one MST   FALSE
+III.If the edge weights are all same, every spanning tree of G is a MST       TRUE
 Which one of the following is correct？  
 [ A ] I is true, II and III are false 
 [ B ] I and III are true but II is false 
@@ -54,9 +54,9 @@ Which one of the following is correct？
 [ D ] I and II and III are false 
 [ E ] II is true but I and III are false
 SOL. WELL, FUCK YOU XJTLU
-NOTE: I IS TRUE, JUST REMEMBER THAT
-    II IS FALSE, an triangle graph with 1 3 3 can prove there is one MST tree
-    III TRUE
+NOTE:   I IS TRUE, JUST REMEMBER THAT
+        II IS FALSE, an triangle graph with 1 3 3 can prove there is one MST tree
+        III TRUE
 
 a: 2b 4c 4d 18e
 b: 2a 4c 3d 4e
@@ -83,14 +83,17 @@ termination, the label for vertex d is
 [ D ] d(6,a),   
 [ E ] d(6,c),
 C
-a b c d e 
-0 2 4 4 6 
-1 1 1 1 1 
+a   b   c   d   e 
+0   2a  4a  4a  18a
+0   2a  4a  4a  6b
+0   2a  4a  4a  6b
+0   2a  4a  4a  6b
+1   1   1   1   0 
 
 19. For the three statements below,  
-I. A problem in the class P can be solved in worst-case by a polynomial time algorithm. 
-II. A problem in the class NP can be solved by a non-polynomial time algorithms 
-III. A problem in the class NP can be verified in polynomial time 
+I. A problem in the class P can be solved in worst-case by a polynomial time algorithm.  TRUE
+II. A problem in the class NP can be solved by a non-polynomial time algorithms          TRUE
+III. A problem in the class NP can be verified in polynomial time                        TRUE
 [ A ] I is true, II and III are false 
 [ B ] I and II are true but III is false 
 [ C ] I and II are false but III is true 
@@ -102,7 +105,7 @@ III TRUE
 E
 
 20. For the following problems  2.5 
-I. Vertex Cover Problem. NP
+I. Vertex Cover Problem. NP 
 II. Finding minimum spanning tree (MST) in a weighted undirected graph. P
 III. 0/1 Knapsack problem. NP
 IV. Traveling Salesman problem.  NP
@@ -112,13 +115,15 @@ Which one of the following is correct？
 [ C ] I , III are NP-Complete Problems, II and IV are P-Problems 
 [ D ] I , III are P-Problems, II and IV are NP-Problems 
 [ E ] I, III and IV are NP-Complete Problems, II is a P-Problem.
-VERTEX COVER NP-COMPLETE
-MST KRUSKAL, PRIM ARE NP
-01KNAPSACK NP-COMPLETE
-TSP NP COMPLETE
+===== NP_COMPLETE AND NP HARD
+NP-COMPLETE BELONG TO NP, ALL THE INSTANCES OF NP-COMPLETE CAN BE VERIFY IN POLYNOMIAL TIME
+NP-HARD IS AT LEAST AS HARD AS NP (THE NP_COMPLETE CAN REDUCTION), BUT MAY NOT CAN BE SOLVED IN POLYNOMIAL TIME (MAY BE THE OPITMIZATION)
+==== ITEMS
+VERTEX COVER NP-COMPLETE USING NP_COMPLETE THE 3_SAT, ALIQUES
+MST: THE PRIM AND KRUSKAL ALGORITHM
+0/1_KNAPSACK: NP_COMPLETE 
+TRAVELING SALESMAN PROBLEM (TSP) NP COMPLETE
 E
-
-PATTERN MATCH: 左插插右插插，指谁插谁
 
 Question I (12 marks) 
 1. Briefly describe the idea of the divide-and-conquer technique. 3 
@@ -140,6 +145,9 @@ sols:
 sol.
 A ≤ₚ B 意味着“任何 A 实例都能在多项式时间内变形为 B 实例并保持答案一致”，因此若 A 已知难而 A ≤ₚ B，则 B 至少同样难（NP‑hard）。
 
+==== NOTE: FOR PATTERN MATCH
+PATTERN MATCH: 左插插上插插，指谁插谁
+
 Question II (18 marks)  
 1. There is a row of n coins whose values are some positive integers c1, c2, . . ., cn, not 
     necessarily distinct. Let F(n) be the maximum amount of money that can be picked up from the 
@@ -151,6 +159,7 @@ Question II (18 marks)
     c) Write pseudocode of the dynamic programming algorithm for solving this problem and 
        determine its time complexity.
 sol.
+    NOTE: FOR THE DP PROBELM, LIST THE LIST FIRST, THEN OBSERVE THE RULE
     a. F(n) = {
             1 if n = 1 
             max( F(n - 1), F(n - 2) + ci) n >= 1
@@ -185,7 +194,7 @@ Consider the following problem. Given an array A consisting of n distinct intege
 It is known that there is a position p (1 <= p <= n), such that A[1], .., A[p] is in increasing order 
 and A[p], A[p+1], …, A[n] is in decreasing order. 
     1. Write a brute force algorithm to find the position p. What is the time complexity of 
-    your algorithm? 
+        your algorithm? 
     2. Devise a “divide and conquer" algorithm to find the position p. 
     3. Set up a recurrence relation for the number of comparisons made by your algorithm and explain it. 
     4. Based on the recurrence relation, show the complexity of your algorithm in big-O notation
@@ -215,43 +224,45 @@ NOTE: IF YOU USE COMPARISION BETWEEN LEFT AND RIGHT, THE COMPLEX WILL BE O(n)
         T(n / 2) + 1 else
     }
 4.
-    T(n) = (n/2) + 1 = F(n / 2^i) + i
-    when n = 2^k  and n = 1
-    T(n) = log2(n)
+    T(n) = T(n / 2) + 1 = T(n / 2^i) + i
+    when n = 2^k and n = 1
+    i = k, k = log2(n)
+    T(n) = T(n / 2^log2(n)) + log2(n)
+         = 1 + log2(n)
+    O(n) = log2(n)
     O(n) = {
-            O(1) if n == 1
-            O(log(n)) if n > 1
-        }
+        O(1) if n == 1
+        O(log(n)) if n > 1
+    }
 
  Polynomial‑Time Reduction & NP‑Completeness
 Definition
-- Given decision problems **A** and **B**, a *polynomial‑time reduction* is a function \
-  f that maps any instance x of **A** to an instance f(x) of **B** \
-  in O(nᵏ) time such that\
-  `x ∈ A  <=>  f(x) ∈ B`.\
+- Given decision problems A and B, a polynomial‑time reduction is a function 
+  f that maps any instance x of A to an instance f(x) of B \
+  in O(nᵏ) time such that
+  `x ∈ A  <=>  f(x) ∈ B`.
   We write this relationship as `A ≤ₚ B`.
 
  Why It Matters
-- If **A** is at least as hard as every NP problem (NP‑hard) and **A ≤ₚ B**, \
-  then **B** is **also** NP‑hard.  
-- A problem is **NP‑complete** when it is both\
-  1. in NP (*certificate verifiable in polynomial time*), and\
+- If A is at least as hard as every NP problem (NP‑hard) and A ≤ₚ B, \
+  then B is also NP‑hard.  
+- A problem is NP‑complete when it is both\
+  1. in NP (certificate verifiable in polynomial time), and\
   2. NP‑hard (some NP‑complete problem reduces to it in poly‑time).
 
  Recipe to Prove a Problem **Q** is NP‑Complete
-1. *NP‑membership* → Show a certificate can be checked in polynomial time.  
-2. *NP‑hardness* → Take a known NP‑complete problem **P** and build \
+1. NP‑membership → Show a certificate can be checked in polynomial time.  
+2. NP‑hardness → Take a known NP‑complete problem P and build \
    a polynomial‑time reduction `P ≤ₚ Q`.  
-3. Conclude that **Q** is NP‑complete because it is in NP **and** NP‑hard.
+3. Conclude that Q is NP‑complete because it is in NP and NP‑hard.
 
 ** One‑Sentence Mnemonic
  “**Poly‑time reduction = fast translation + answer preservation; if a known hard problem turns into yours, yours is at least that hard.**”
 
-
 ==========================================================================
 22R
 
-5. Running time T(n), where 'n' is input size of a recursive algorithm is given as follows:
+5. Running time T(n), where 'n' is input size of a *recursive!!!* algorithm is given as follows:
 Which of the following algorithms, its time complexity can be expressed by the T(n)?  
     a) Binary Search 
     b) Merge Sort 
@@ -266,16 +277,16 @@ SOL B
     Dijkstra's algorithm -> O(n^2) PRIOIRTY QUEUE, NOT REC
 
 14. Let T be a tree constructed by Dijkstra’s algorithm in the process of solving the 
-single-source shortest path problem for a weighted connected graph G.
-    I.  T is a spanning tree of G
-    II. T is a minimum spanning tree of G
-    III. T is a binary tree
+    single-source shortest path problem for a weighted connected graph G.
+        I.  T is a spanning tree of G          TRUE
+        II. T is a minimum spanning tree of G  NOT MST, FALSE
+        III. T is a binary tree                NOT BINARY
     Which one of the following is correct?  
-    a) I is true, II and III are false  
-    b) I and II and III are true  
-    c) I and II and III are false  
-    d) II and III are true but I is false  
-    e) None of the above
+        a) I is true, II and III are false  
+        b) I and II and III are true  
+        c) I and II and III are false  
+        d) II and III are true but I is false  
+        e) None of the above
 SOL.
 A
     NOTE:
@@ -287,9 +298,9 @@ A
     ONLY I IS CORRECT
 
 15. Let G be a weighted connected graph 
-    I.  If e is a minimum-weight edge in G, it must be contained in a MST.  
-    II. If e is a minimum-weight edge in G, it must be contained in each MST.  
-    III. If e is a maximum-weight edge in G, it must not be contained in any MST.  
+    I.  If e is a minimum-weight edge in G, it must be contained in a MST.   NOTE: IN A MST
+    II. If e is a minimum-weight edge in G, it must be contained in each MST.   NOTE: NOT MUST
+    III. If e is a maximum-weight edge in G, it must not be contained in any MST.  NOTE: like 3 3 3 GRAPH, 3 is the maximum
     Which one of the following is correct?  
     a) I and III are true, II is false  
     b) I and II and III are true  
@@ -303,8 +314,8 @@ A
     III NO, IMAGINE A 3 3 3 TRIANGLE:
 
 16. Let G be a weighted connected graph 
-    I. If the edge weights are all different G must have exactly one MST  
-    II. If the edge weights are not all different G must have more than one MST
+    I. If the edge weights are all different G must have exactly one MST         TRUE
+    II. If the edge weights are not all different G must have more than one MST  FALSE. FOREXAMPLE KRUSKAL ALGORITHM COULD IGNORE THE MAX WEIGHT EDGES WITH SAME WIDHT
     Which one of the following is correct?  
     a) I and III are true, II is false  
     b) I and II and III are true  
@@ -335,8 +346,8 @@ c[i][j] = {
     0 if i = 0 or j = 0
     c[i - 1][j - 1] + 1 if i , j > 0 and A[i] = B[j]
     max(c[i - 1][j], c[i][j - 1]) if i , j > 0 and A[i] != B[j]
+}
 
-    }
 The following is an incomplete table for the sequences of AATGTT and AGCT.
 25. The value of c[3, 4] is   
     a) 1 
@@ -344,7 +355,8 @@ The following is an incomplete table for the sequences of AATGTT and AGCT.
     c) 3 
     d) 4 
     e) 5
-B well the i there is the row while j is the shti
+B well the i there is the row while j is the column
+i -> PATTERN, j -> TEXT
 
 26. The length of the longest common subsequence of AATGTT and AGCT is
     a) 1 
@@ -367,7 +379,7 @@ sol
 NOTE:
     THE NOTE IN THE 26
 
-28. The length of the longest common subsequence of AATGT and AGC is
+28. The length of the longest common subsequence of AATGT and AGCT is
     a) 1 
     b) 2 
     c) 3 
@@ -432,7 +444,7 @@ SOLS
         if match_cnt == 1 then return "Yes"
         else return "No"
 
-    2.   worst case: 
+    2. worst case: 
         like all failed in the last cahr
         CCCCCC
         CA
