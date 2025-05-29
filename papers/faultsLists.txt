@@ -522,15 +522,15 @@ SOL.
         - Note that P ⊆ NP, and it is unknown whether P = NP.
 
 3. For each problem below, state whether it is a P problem or NP-complete problem.  
-    1. Vertex Cover Problem. 1 
-    2. Finding minimum spanning tree (MST) in a weighted undirected graph 1 
-    3. 0/1 Knapsack problem. 1 
-    4. Finding the nth Fibonacci number. 1 
+    1. Vertex Cover Problem. 
+    2. Finding minimum spanning tree (MST) in a weighted undirected graph
+    3. 0/1 Knapsack problem.
+    4. Finding the nth Fibonacci number.
 SOLS:
     1. for Vertex Cover problem, there are many solutions to many instances, DFS, BFS, MST etc
     2. for finding minimum spanning tree -> PRIM, KRUSKAL can finish in O(E LogV)
     3. for 0/1 knapsack problem, NP,
-    4. teh fibonacci -> classical DP algo
+    4. teh fibonacci -> classical DP algo, P
 
 Question 2  
 Consider the problem of searching for genes in DNA sequences using Horspool’s algorithm. A 
